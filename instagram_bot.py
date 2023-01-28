@@ -100,11 +100,10 @@ for hashtag in hashtags:
             elif commentRandomizer == 10:
                 commentInput.send_keys('So cool! 😎', Keys.ENTER)
 
-            # There is a "timing" limit too...
-            # Wait 20–30 seconds between each "like" or "comment".
-            # If you go too fast, Instagram might think you are a bot (XD) and block you.
-            sleep(20)
+        # There is a "timing" limit too...
+        # Wait 20–30 seconds between each "like" or "comment".
+        # If you go too fast, Instagram might think you are a bot (XD) and block you.
+        sleep(20)
 
         # Next photo
         webdriver.find_element(By.XPATH, "/html/body/div[2]/div/div/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div[1]/div/div/div[2]/button").click()
-        sleep(2)
