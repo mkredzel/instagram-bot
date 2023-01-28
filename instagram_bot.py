@@ -1,15 +1,24 @@
-from selenium import webdriver
+import os
+
+from dotenv import load_dotenv
+from selenium.webdriver import Firefox
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains 
-from time import sleep, strftime
+
+from time import sleep
 from random import randint
 
-# Firefox Profile Language Preferences
-firefox_profile = webdriver.FirefoxProfile() 
-firefox_profile.set_preference('intl.accept_languages', 'en')
+# Load Environment Variables
+load_dotenv()
 
-# Gecko Driver Path
-webdriver = webdriver.Firefox(executable_path=r'Enter_your_path_for_geckodriver.exe', firefox_profile=firefox_profile)
+# Firefox Profile Configuration
+service = Service(os.getenv('GECKO_DRIVER_PATH'))
+options = Options()
+options.set_preference('profile', os.getenv('FIREFOX_PROFILE_PATH'))
+webdriver = Firefox(service=service, options=options)
 sleep(3)
 
 # Go To Login Page
@@ -18,9 +27,9 @@ sleep(3)
 
 # User Credentials
 username = webdriver.find_element_by_name('username')
-username.send_keys('enter_your_username')
+username.send_keys(os.getenv('USERNAME'))
 password = webdriver.find_element_by_name('password')
-password.send_keys('enter_your_password')
+password.send_keys(os.getenv('PASSWORD'))
 
 # Click 'not now' buttons
 buttons = webdriver.find_elements_by_tag_name('button')
